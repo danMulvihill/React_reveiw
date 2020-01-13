@@ -56,6 +56,13 @@ const reset = () => {
     renderApp();
 }
 
+//toggle
+let vis = true;
+const ToggleVis = () => {
+    if(vis == true) vis = false
+    else vis = true;
+    renderApp();
+}
 
 
 function renderApp(){
@@ -73,14 +80,19 @@ function renderApp(){
             <input type="text" name="option" />
             <button>Add to list</button>
         </form>
-        <button onClick={removeAll}>Remove all items from list</button>
-        <button onClick={pickOne}>Randomly pick a thing</button>
-
+        <p>
+            <button onClick={removeAll}>Remove all items from list</button>
+            <button onClick={pickOne}>Randomly pick a thing</button>
+        </p>
 
          <h1>Count: {count}</h1>
         <button onClick={addOne}>+1</button>
         <button onClick={minusOne}>-1</button>
         <button onClick={reset}>reset</button>
+
+        <h1>Toggle visibilty</h1>
+        <button onClick={ToggleVis}>Click to {vis?"reveal":"hide"} secret message</button>
+        <p>{vis?"":"Be sure to drink your Olvatine"}</p>
     </div>;
 
     ReactDOM.render(template, document.getElementById('root'));
