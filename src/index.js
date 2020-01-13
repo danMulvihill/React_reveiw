@@ -5,9 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 var user ={
-    //name: "Dan",
+    name: "Dan",
     location: "Philly",
-    options: [5,6,4,76]
+    options: []
 }
 const getLocation = (loc) => {
     // if (loc){
@@ -18,6 +18,28 @@ const getLocation = (loc) => {
     return loc ? loc : "unknown"
 }
 
+//todo list
+const onFormSubmit = e => {
+    e.preventDefault();
+    let option = e.target.elements.option.value;
+    if (option){
+        user.options.push(option);
+        console.log(user.options);
+        e.target.elements.option.value = "";
+    }
+    renderApp();
+}
+
+const removeAll = () =>{
+    user.options = [];
+    renderApp();
+}
+
+const pickOne = () => {
+    let rand = Math.floor(Math.random()*user.options.length);
+    const picked = user.options[rand];
+    alert(picked);
+};
 
 //counter
 let count = 0;
@@ -38,9 +60,23 @@ const reset = () => {
 
 function renderApp(){
      let template = <div>
-        <h1>{user.name?user.name.toUpperCase():"unknown"}</h1>
-        <h2>{getLocation(user.location)}</h2>
-        <p>{user.options.length>0?user.options.length+" ops": "No options!"}</p>
+        <h2>Greeting</h2>
+        <p>Hello {user.name?user.name.toUpperCase():"unknown"} from
+            {getLocation(user.location)}</p>
+        
+        <h1>Todo List</h1>
+        <p>{user.options.length>0?user.options.length+" things": "Nothing todo!"}</p>
+        <ol>
+            {user.options.map(option => <li key={option}>{option}</li>)}
+        </ol>
+        <form onSubmit={onFormSubmit}>
+            <input type="text" name="option" />
+            <button>Add to list</button>
+        </form>
+        <button onClick={removeAll}>Remove all items from list</button>
+        <button onClick={pickOne}>Randomly pick a thing</button>
+
+
          <h1>Count: {count}</h1>
         <button onClick={addOne}>+1</button>
         <button onClick={minusOne}>-1</button>
