@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import TodoApp from './App';
 import * as serviceWorker from './serviceWorker';
 
 var user ={
@@ -101,8 +101,11 @@ function renderApp(){
 
 
 
+/****toggle these 2 commits to go back and forward between versions ****/
 
-renderApp();
+//renderApp();
+ReactDOM.render(<TodoApp />, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
